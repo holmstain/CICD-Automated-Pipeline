@@ -1,0 +1,30 @@
+services:
+  app-blue:
+    image: ${IMAGE_URI:?Set IMAGE_URI}:${IMAGE_TAG:?Set IMAGE_TAG}
+    restart: unless-stopped
+    init: true
+    env_file:
+      - .env.production
+    ports:
+      - "127.0.0.1:3001:8080"
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    labels:
+      org.opencontainers.image.source: ${IMAGE_SOURCE:-https://github.com/example/project}
+
+  app-green:
+    image: ${IMAGE_URI:?Set IMAGE_URI}:${IMAGE_TAG:?Set IMAGE_TAG}
+    restart: unless-stopped
+    init: true
+    env_file:
+      - .env.production
+    ports:
+      - "127.0.0.1:3002:8080"
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    labels:
+      org.opencontainers.image.source: ${IMAGE_SOURCE:-https://github.com/example/project}
